@@ -1,6 +1,14 @@
 import java.util.Scanner;
 import java.text.DecimalFormat;
 import java.text.Format;
+/**CS121 Section #035
+ * 
+ * @author[Robbie Gill]
+ *
+ * This program manages a user's songs given by user input to create a 
+ * simplified playlist that then prints to the screen.
+ * 
+ * */
 public class PlayList {
 	
 	//these are the String values that are prompted to the user, when prompted to add a song
@@ -28,7 +36,13 @@ public class PlayList {
 	
 	private static Scanner reader = new Scanner(System.in);
 
-	//method that converts numbers in (mm:ss) to an integer representing total seconds
+	/**
+	 * method that converts numbers in (mm:ss)
+	 * to an integer representing total seconds
+	 * @param mmss takes a String number value in format (mm:ss)
+	 * @return returns an integer value representing the total number 
+	 * of seconds represented in mmss.
+	 */
 	public static int minutesToSeconds(String mmss) {
 				int lengthOfInput = mmss.length();
 				
@@ -53,7 +67,11 @@ public class PlayList {
 				return totalSeconds;
 				}
 	
-	
+	/**
+	 * prints prompts to the user about Song, Artist, playtime and 
+	 * file path.
+	 * 
+	 */
 	public static void newSongUserInput() {
 		//===================
 		//these are the String values that are prompted to the user.
@@ -69,7 +87,12 @@ public class PlayList {
 		filePath = reader.nextLine();
 		
 	}
-	
+	/**
+	 * prints a formatted String to the console, based on a Song object.
+	 * 
+	 * @param songName specifies the song object who's attributes you want to print.
+	 * 
+	 */
 	public static void SongInfoPrintOut(Song songName) {
 		//prints input session for one song in order song title, song artist, play time, file path.
 		System.out.println(promptSong + songName.getTitle());
@@ -77,9 +100,16 @@ public class PlayList {
 		System.out.println(promptTime + songName.getPlayTime());
 		System.out.println(promptPath + songName.getFilePath());
 	}
-	//returns a double average of the three songs to two decimal places.
+	/**
+	 * Takes three song playtime values and returns the average of the three.
+	 * @param song0 takes a song object and calls its getPlayTime() method.
+	 * @param song1 takes a song object and calls its getPlayTime() method.
+	 * @param song2 takes a song object and calls its getPlayTime() method.
+	 * @return a string value that represents the average playtime of the 
+	 * three Song objects.
+	 */
 	public static String averagePlayTime(Song song0,Song song1, Song song2) {
-		
+		//returns a double average of the three songs to two decimal places.
 		DecimalFormat fmt = new DecimalFormat("0.##");
 		
 		double averagePlayTime = ((song0.getPlayTime() + song1.getPlayTime() + song2.getPlayTime())/3.0);
@@ -88,15 +118,21 @@ public class PlayList {
 		
 			return formattedAveragePlaytime;
 	}
-	//Determines which song is closest to 4 minutes
+	
+	
+	/**
+	 * //represents absolute value of seconds away
+	 *  from 4 minutes the song is and returns a String of the closest one.
+	 * @param song0 Song object whos playtime is to be compared.
+	 * @param song1 Song object whos playtime is to be compared.
+	 * @param song2 Song object whos playtime is to be compared.
+	 * @return String value representing the title of the closest song.
+	 */
 	public static String closestToFour(Song song0,Song song1,Song song2) {
-		//represents absolute value of seconds away from 4 minutes the song is.
+		
 		double song0Diff = Math.abs(song0.getPlayTime() - 240.0);
 		double song1Diff = Math.abs(song1.getPlayTime() - 240.0);
 		double song2Diff = Math.abs(song2.getPlayTime() - 240.0);
-		
-		// checks which song is the closest by comparing which difference amounts to the smallest amount from 4 minutes.
-		//================================================================
 		//checks if song0 is smallest difference from 4 minutes.
 		if (song0Diff < song1Diff && song0Diff < song2Diff) {
 			
@@ -116,10 +152,15 @@ public class PlayList {
 		
 		else {
 			return "Something went wrong!";
-		}
-		//================================================================	
+		}	
 	}
-	
+	/**
+	 * Orders print statements in ascending order of Song Objects based on their 
+	 * play times.
+	 * @param song0 Song object who's playtime is to be compared.
+	 * @param song1 Song object who's playtime is to be compared.
+	 * @param song2 Song object who's playtime is to be compared.
+	 */
 	public static void sortedPlayList(Song song0,Song song1,Song song2) {
 		int playTime0 = song0.getPlayTime();
 		int playTime1 = song1.getPlayTime();
